@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+        }
+
+        .container {
+            width: 420px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: green;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 12px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .gender {
+            margin-top: 5px;
+        }
+
+        .gender input {
+            margin-right: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: darkgreen;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Registration Form</h2>
+
+    <form onsubmit="return validateForm()">
+        <label>First Name:</label>
+        <input type="text" id="fname">
+
+        <label>Last Name:</label>
+        <input type="text" id="lname">
+
+        <label>Email:</label>
+        <input type="email" id="email">
+
+        <label>Password:</label>
+        <input type="password" id="password">
+
+        <label>Re-type Password:</label>
+        <input type="password" id="confirmPassword">
+
+        <label>Contact:</label>
+        <input type="tel" id="contact">
+
+        <label>Gender:</label>
+        <div class="gender">
+            <input type="radio" name="gender" value="Male"> Male
+            <input type="radio" name="gender" value="Female"> Female
+            <input type="radio" name="gender" value="Other"> Other
+        </div>
+
+        <p class="error" id="errorMsg"></p>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        let fname = document.getElementById("fname").value;
+        let lname = document.getElementById("lname").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+        let contact = document.getElementById("contact").value;
+        let gender = document.querySelector('input[name="gender"]:checked');
+        let errorMsg = document.getElementById("errorMsg");
+
+        if (fname === "" || lname === "" || email === "" || password === "" || confirmPassword === "" || contact === "") {
+            errorMsg.innerHTML = "All fields are required";
+            return false;
+        }
+
+        if (password !== confirmPassword) {
+            errorMsg.innerHTML = "Passwords do not match";
+            return false;
+        }
+
+        if (!gender) {
+            errorMsg.innerHTML = "Please select gender";
+            return false;
+        }
+
+        alert("Registration Successful!");
+        return true;
+    }
+</script>
+
+</body>
+</html>
